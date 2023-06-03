@@ -118,7 +118,7 @@ if agree:
     
 agree = sidebar.checkbox("Raw de reacciones")
 if agree:
-    st.header("Resultados...")
+    st.header("info de reacciones...")
     st.write(items)
     st.markdown("_")
 
