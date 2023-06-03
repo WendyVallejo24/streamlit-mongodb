@@ -27,7 +27,7 @@ except:
 st.title("Visualizacion de MongoDB")
 # Pull data from the collection.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
-@st.cache_data(ttl=600)
+@st.experimental_memo(ttl=600)
 def get_data():
     items = db.artists_reactions.find()
     items = list(items)  # make hashable for st.cache_data
@@ -51,22 +51,6 @@ sidebar.title("Wendy Belén Vallejo Patraca")
 sidebar.write("Matricula: S20006733")
 sidebar.write("zS20006733@estudiantes.uv.mx")
 sidebar.markdown("___")
-
-#    
-agree = sidebar.checkbox("Ver resultados raw (json) ? ")
-if agree:
-    st.header("Resultados...")
-    st.write(items)
-    st.markdown("___")
-
-sidebar.markdown("___")
-sidebar.markdown("Reacciones")
-#
-agree = sidebar.checkbox("Tabla de reactions")
-if agree:
-    st.subheader("Reactions...")
-    st.dataframe(items)
-    st.markdown("___")
 
 ############### reactions ################
 if st.sidebar.checkbox('Grafica de barras reactions'):
@@ -216,3 +200,19 @@ if st.sidebar.checkbox('Grafica de pastel usuarios'):
     st.markdown("___")
     
 sidebar.markdown("___")
+
+#    
+agree = sidebar.checkbox("Ver resultados raw (json) ? ")
+if agree:
+    st.header("Resultados...")
+    st.write(items)
+    st.markdown("___")
+
+sidebar.markdown("___")
+sidebar.markdown("Reacciones")
+#
+agree = sidebar.checkbox("Tabla de reactions")
+if agree:
+    st.subheader("Reactions...")
+    st.dataframe(items)
+    st.markdown("___")
